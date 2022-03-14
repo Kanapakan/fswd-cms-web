@@ -28,7 +28,7 @@ const PostCard = ({ posts, users }) => {
     <>
       {posts.map((post, i) => (
         <Card key={i} sx={{ maxWidth: 345, minHeight: 350 }} spacing={0}>
-          <Link href={'/posts/' + post.id}>
+          <Link href={'/posts/' + post.id} key={i}>
             <a>
           <CardMedia
             component="img"
@@ -55,7 +55,7 @@ const PostCard = ({ posts, users }) => {
 
                   }
                   title={user.name}
-                  subheader={moment(post.date).format("LL")}
+                  subheader={moment(post.date).format("LLL")}
                 />
               );
             }
