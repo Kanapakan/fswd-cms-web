@@ -1,6 +1,6 @@
 # Front-end CMS Midterm project (Full-Stack Web Developer Course)
 ## Deployed website
-Website : https://fswd-cms-web-4vvv7yzdj-kanapakan.vercel.app/home
+Website : https://fswd-cms-web-kanapa-7l7bfyyih-kanapakan.vercel.app/
 
 
 
