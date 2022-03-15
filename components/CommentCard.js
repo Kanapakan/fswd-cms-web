@@ -4,11 +4,11 @@ import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import { red } from "@mui/material/colors";
 import CardHeader from "@mui/material/CardHeader";
-import Paper from '@mui/material/Paper';
-import moment from 'moment'
+import Paper from "@mui/material/Paper";
+import moment from "moment";
+import styles from "../styles/Comment.module.css";
 
-const CommentCard = ({ postId }) => {
-  console.log(postId);
+const CommentCard = ({ postId, reload }) => {
   const [ments, setMents] = useState(null);
 
   useEffect(() => {
@@ -21,51 +21,49 @@ const CommentCard = ({ postId }) => {
       setMents(res);
     }
     fetchComments(postId);
-  }, [postId]);
+  }, [postId,reload]);
 
-  console.log("comments", ments);
 
   return (
-
-
-      <Box
-        
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          "& > :not(style)": {
-            m: 1,
-            width: '100%',
-            height: 128,
-          },
-        }}
+    <>
+    <div
+        className={styles.comment_header}
       >
-        {ments?.map((item, i) => (
-        <Paper elevation={0} key={i} >
-           <div className="post-comments" >
-            <div className="comment-author">
-            <CardHeader
-                sx={{paddingTop: 2}}
-                  
-                  avatar={
-                    <Avatar  aria-label="recipe"  />
+        <h1>Comment</h1>
+      </div>
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        "& > :not(style)": {
+          mt: '15px',
+          width: "100%",
+        },
+      }}
+    >
+      
 
-                  }
-                  title= {item.author_name}
-                  subheader= {moment(item.date).format("LLL")}
-                />
+      {ments?.map((item, i) => (
+        <Paper elevation={0} key={i}>
+          <div className={styles.post_comments}>
+            <div className="comment-author">
+              <CardHeader
+                sx={{ paddingTop: 2, paddingBottom: 1}}
+                avatar={<Avatar aria-label="recipe" />}
+                title={item.author_name}
+                subheader={moment(item.date).format("LLL")}
+              />
             </div>
-            <div className="comment-content" style={{ paddingLeft: 15 }}>
-            <span dangerouslySetInnerHTML={{ __html: item.content.rendered }} />
+            <div className={styles.comment_content}>
+              <span
+                dangerouslySetInnerHTML={{ __html: item.content.rendered }}
+              />
             </div>
           </div>
         </Paper>
-        ))}  
-      </Box>
-    
-      
-
-
+      ))}
+    </Box>
+    </>
   );
 };
 

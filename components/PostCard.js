@@ -12,17 +12,6 @@ import moment from 'moment'
 import Link from "next/link";
 
 const PostCard = ({ posts, users }) => {
-  // {posts.map((post, i) => {
-  //   console.log(post.title.rendered)
-  //   // let content = posts.content.rendered
-  //   {users.map((user, i) => {
-  //       if(user.id === post.author) {
-  //           console.log(user.name)
-  //       }
-  //   })}
-    
-  // })} 
-
 
   return (
     <>

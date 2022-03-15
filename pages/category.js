@@ -3,7 +3,7 @@ import React from 'react'
 function Category() {
   
     return (
-      <div>
+      <div className='container'>
         <h1>Category</h1>
       </div>
     );
