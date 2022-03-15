@@ -9,14 +9,14 @@ function Home() {
       <div className={styles.detail_con}>
         <div className={styles.post_content}>
             <div className="center-home-content">
-              <h1 style={{fontSize: "32px"}}>Welcome to the
-DigitalOcean Community!</h1>
+              <h1 style={{fontSize: "32px"}}>Welcome to My CMS Website!</h1>
+              <h3>Created By </h3>
+              <h3>Kanapa Kanwiwat</h3>
+              <p>This Website is part of the Full-Stack Web Developer course</p>
             </div>
         </div>
 
-        <div className={styles.comment_header}>
-          <h1>Comment Below</h1>
-        </div>
+
 
 
          

@@ -11,11 +11,12 @@ import styles from "../styles/Comment.module.css";
 const CommentCard = ({ postId, reload }) => {
   const [ments, setMents] = useState(null);
 
+
   useEffect(() => {
     async function fetchComments(id) {
       let res = await fetch(
-        // `https://fswd-wp.devnss.com/wp-json/wp/v2/comments?post=${id}&orderby=date&per_page=100`
-        `https://fswd-wp.devnss.com/wp-json/wp/v2/comments?post=${id}`
+        `https://fswd-wp.devnss.com/wp-json/wp/v2/comments?post=${id}&orderby=date&per_page=100`
+        // `https://fswd-wp.devnss.com/wp-json/wp/v2/comments?post=${id}`
       );
       res = await res.json();
       setMents(res);
@@ -29,7 +30,7 @@ const CommentCard = ({ postId, reload }) => {
     <div
         className={styles.comment_header}
       >
-        <h1>Comment</h1>
+        <h1> {ments?.filter(comment => comment.post === postId).length} Comments</h1>
       </div>
     <Box
       sx={{

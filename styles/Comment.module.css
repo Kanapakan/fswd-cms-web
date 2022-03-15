@@ -35,6 +35,7 @@
     color: rgb(255, 255, 255);
     display: flex;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .post_comment_form_con{
@@ -65,4 +66,7 @@
     /* flex-wrap: wrap; */
     margin-bottom: 20px;
 
+}
+.author_link:hover{
+    color: blue;
 }

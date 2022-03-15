@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import CommentCard from "../../components/CommentCard";
@@ -6,36 +6,32 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import styles from "../../styles/Comment.module.css";
+import moment from "moment";
+import Link from "next/link";
 
 export const getServerSideProps = async (context) => {
   const res = await fetch(
     "https://fswd-wp.devnss.com/wp-json/wp/v2/posts/" + context.params.id
   );
   const data = await res.json();
-  const userRes = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/users')
-  const user = await userRes.json()
-  const categoryRes = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/categories')
-  const category = await categoryRes.json()
+  const userRes = await fetch("https://fswd-wp.devnss.com/wp-json/wp/v2/users/" + data.author);
+  const user = await userRes.json();
+  const categoryRes = await fetch(
+    "https://fswd-wp.devnss.com/wp-json/wp/v2/categories"
+  );
+  const category = await categoryRes.json();
   return {
-    props: { post: data,
-            users: user,
-            categories: category,  },
+    props: { post: data, 
+      users: user, 
+      categories: category },
   };
 };
 const PostDetails = ({ post, users, categories }) => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [reloadMent, setReloadMent] = useState(false);
-  const [author, setAuthor] = useState(null)
-  
-  const findAuthor = () => {
-     {users.map((user) => {
-        if(user.id === post.author){
-          setAuthor(user)
-        }
-      })
-  }}
-
+ 
+  console.log(users);
 
   const submitPost = async ({ name, comment }) => {
     const response = await fetch(
@@ -65,15 +61,23 @@ const PostDetails = ({ post, users, categories }) => {
       <div className={styles.detail_con}>
         <div className={styles.post_content}>
           <h1>{post.title.rendered}</h1>
-          <hr/>
-
+          <hr />
+          <div className="author-area" style={{ textAlign: "left" }}>
+            <p style={{fontSize: "20px", margin:"0px"}} >Published on {moment(post.date).format("LLL")}</p>
+            <Link href={"/author/" + users.id}>
+              <a>
+                <p className={styles.author_link}style={{fontSize: "22px", margin:"0px"}}>{users.name}</p>
+              </a>
+            </Link>
+            
+          </div>
 
           <span dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
           <span dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
         </div>
 
         <div className={styles.comment_header}>
-          <h1>Comment Below</h1>
+          <h1>Leave a Comment</h1>
         </div>
 
         <Box
@@ -111,6 +115,7 @@ const PostDetails = ({ post, users, categories }) => {
                 />
               </Stack>
               <Button
+                sx={{ mt: "20px" }}
                 variant="contained"
                 size="large"
                 onClick={() => submitPost({ name, comment })}

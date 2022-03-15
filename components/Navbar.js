@@ -83,6 +83,11 @@ const Navbar = () => {
                 <a className="nav-item"><p className="nav-text">Posts</p></a>
               </Link>
             </li>
+            <li className="menu-link" onClick={closeMobileMenu}>
+              <Link href="/author">
+                <a className="nav-item"><p className="nav-text">Authors</p></a>
+              </Link>
+            </li>
             <li className="menu-link" onClick={onClickTag} style={{cursor: "pointer"}}>
               <a className="nav-item">
               <p className="nav-text">Category/Tags

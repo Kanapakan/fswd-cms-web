@@ -3,6 +3,7 @@ import PostCard from "../../components/PostCard";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import TitleCard from "../../components/TitleCard";
 
 export const getServerSideProps = async (context) => {
   const userRes = await fetch("https://fswd-wp.devnss.com/wp-json/wp/v2/users");
@@ -50,7 +51,7 @@ const CategoryType = ({ posts, users, categories, cateName }) => {
         <Grid container sx={{  marginTop: '5rem'}} justifyContent="center">
           <Grid item>
             <ThemeProvider theme={lightTheme}>
-            <h1>{cateName}</h1>
+            <TitleCard title={cateName} />
               <Box
                 sx={{
                   display: "grid",

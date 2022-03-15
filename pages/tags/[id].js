@@ -3,6 +3,7 @@ import PostCard from "../../components/PostCard";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import TitleCard from "../../components/TitleCard";
 
 export const getServerSideProps = async (context) => {
   const userRes = await fetch("https://fswd-wp.devnss.com/wp-json/wp/v2/users");
@@ -26,7 +27,7 @@ export const getServerSideProps = async (context) => {
   };
 };
 const TagTypes = ({ posts, users, tags, tagName }) => {
-    console.log(tags, tagName )
+    // console.log(tags, tagName )
   const lightTheme = createTheme({ palette: { mode: "light" } });
   let tagArr = [];
 
@@ -51,7 +52,8 @@ const TagTypes = ({ posts, users, tags, tagName }) => {
         <Grid container sx={{  marginTop: '5rem'}} justifyContent="center">
           <Grid item>
             <ThemeProvider theme={lightTheme}>
-            <h1>{tagName}</h1>
+            
+            <TitleCard title={tagName} />
               <Box
                 sx={{
                   display: "grid",
