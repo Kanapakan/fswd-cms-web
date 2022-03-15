@@ -38,7 +38,7 @@ const PostDetails = ({ post }) => {
         },
       }
     );
-    const data = await response.json();
+    // const data = await response.json();
     setName("");
     setComment("");
     setReloadMent(!reloadMent);

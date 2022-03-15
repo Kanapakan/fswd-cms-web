@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Home from './home'
+import PostContent from './posts'
 
 
 // import Navbar from '../components/Navbar'
@@ -8,7 +9,7 @@ import Home from './home'
 export default function Home2() {
   return (
     <div>
-      <Home />
+      <PostContent />
           </div>
   )
 }

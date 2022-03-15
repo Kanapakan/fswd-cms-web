@@ -5,6 +5,7 @@
 .navbar {
     background: #333;
     height: 80px;
+    
 }
 .navbar-con {
     padding-left: 2rem;
@@ -12,6 +13,7 @@
     justify-content: space-between;
     height: 80px;
     align-items: center;
+
 }
 .logo-container a {
     color: #fff;
@@ -34,8 +36,36 @@
     display: none;
 }
 
+.tag-menu{
+    width: 100%;
+    height: auto;
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        top: 80px;
+        left: 0px;
+        transition: 0.9s ease;
+        background-color: rgb(212, 170, 170);
+        
+        box-shadow: rgb(3 27 78 / 10%) 0px 2px 4px, rgb(3 27 78 / 10%) 0px 2px 4px 0px
 
-@media screen and (max-width: 480px) {
+}
+
+
+.left-category{
+    /* background-color: #ff9e2c; */
+    padding-left: 40px;
+  float: left;
+  width: 50%;
+  border-right: 2px solid rgb(167, 130, 130);
+}
+.right-tag {
+    /* background-color: #b6701e; */
+    padding-left: 40px;
+  float: left;
+  width: 50%;
+}
+@media screen and (max-width: 510px) {
     .mobile-menu {
         display: block;
         color: #fff;
@@ -72,7 +102,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 10vw;
+        height: 50px;
         padding: 10px 0;
+    }
+
+    .tag-menu{
+        width: 100%;
+            height: auto;
+            display: flex;
+            position: absolute;
+            flex-direction: column;
+            top: 230px;
+            left: 0px;
+            transition: 0.5s ease;
+
+    
     }
 }

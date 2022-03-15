@@ -1,3 +1,4 @@
+
 .detail_con {
     height: 100%;
     min-width: 480px;
@@ -8,8 +9,7 @@
     flex-direction: column;
     /* text-align: center;
     align-items: center; */
-    justify-content: center;
-    max-width: -webkit-fill-available;
+
 
 
 }
