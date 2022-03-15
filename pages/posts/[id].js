@@ -12,15 +12,30 @@ export const getServerSideProps = async (context) => {
     "https://fswd-wp.devnss.com/wp-json/wp/v2/posts/" + context.params.id
   );
   const data = await res.json();
-
+  const userRes = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/users')
+  const user = await userRes.json()
+  const categoryRes = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/categories')
+  const category = await categoryRes.json()
   return {
-    props: { post: data },
+    props: { post: data,
+            users: user,
+            categories: category,  },
   };
 };
-const PostDetails = ({ post }) => {
+const PostDetails = ({ post, users, categories }) => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [reloadMent, setReloadMent] = useState(false);
+  const [author, setAuthor] = useState(null)
+  
+  const findAuthor = () => {
+     {users.map((user) => {
+        if(user.id === post.author){
+          setAuthor(user)
+        }
+      })
+  }}
+
 
   const submitPost = async ({ name, comment }) => {
     const response = await fetch(
@@ -50,6 +65,9 @@ const PostDetails = ({ post }) => {
       <div className={styles.detail_con}>
         <div className={styles.post_content}>
           <h1>{post.title.rendered}</h1>
+          <hr/>
+
+
           <span dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
           <span dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
         </div>

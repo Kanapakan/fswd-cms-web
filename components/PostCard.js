@@ -17,7 +17,7 @@ const PostCard = ({ posts, users, catagories }) => {
   return (
     <>
       {posts?.map((post, i) => (
-        <Card key={i} sx={{ maxWidth: 345, minHeight: 350, borderRadius: '24px'}} elevation={0}>
+        <Card className="card-content" key={i} sx={{ maxWidth: 345, minHeight: 350, borderRadius: '10px', boxShadow:"0 0 2px 0 rgb(39 43 47 / 10%)"}} elevation={0}>
           <Link href={'/posts/' + post.id} key={i}>
             <a>
           <CardMedia
@@ -39,6 +39,8 @@ const PostCard = ({ posts, users, catagories }) => {
           {users.map((user, i) => {
             if (user.id == post.author) {
               return (
+                <Link href={'/author/' + user.id} key={i}>
+                  <a>
                 <CardHeader
                 sx={{paddingTop: 2}}
                   key={i}
@@ -49,6 +51,8 @@ const PostCard = ({ posts, users, catagories }) => {
                   title={user.name}
                   subheader={moment(post.date).format("LLL")}
                 />
+                </a>
+                </Link>
               );
             }
           })}

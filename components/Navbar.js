@@ -1,18 +1,39 @@
 import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-// import styles from '../components/Navbar.module.css'
 import Link from "next/link";
-import Button from "@mui/material/Button";
 import { AiFillCaretUp, AiFillCaretDown } from "react-icons/ai";
-import { BiRun } from "react-icons/bi";
+import { BiRun, BiCategoryAlt } from "react-icons/bi";
+import { FaHashtag } from "react-icons/fa";
+import { MdCategory } from "react-icons/md";
 
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
   const [clickTag, setClickTag] = useState(false);
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
-  const onClickTag = () => setClickTag(!clickTag);
+  const handleClick = () => {
+    if(clickTag == true) {
+      setClickTag(!clickTag)
+    }
+    setClick(!click)
+    // setClickTag(!clickTag)
+  }
+  const closeMobileMenu = () => {
+    if(clickTag == true) {
+      setClickTag(!clickTag)
+  }
+    setClick(false);
+    
+    
+  }
+
+  const onClickTag = () => {
+  setClickTag(!clickTag)
+
+}
+  const closeALl = () => {
+    setClickTag(!clickTag)
+    setClick(!click)
+  }
 
 
 
@@ -21,21 +42,21 @@ const Navbar = () => {
       <div className="tag-menu">
         <div className="tag-con">
           <div className="left-category">
-            <h2>Categories</h2>
-              <Link href="/category/Category"><a onClick={onClickTag}><p>Category</p></a></Link>
-              <Link href="/category/Classic"><a onClick={onClickTag}><p>Classic</p></a></Link>
-              <Link href="/category/Life"><a onClick={onClickTag}><p>Life</p></a></Link>
-              <Link href="/category/Runner"><a onClick={onClickTag}><p><BiRun/>Runner</p></a></Link>
-              <Link href="/category/Style"><a onClick={onClickTag}><p>Style</p></a></Link>
-              <Link href="/category/Uncategorized"><a onClick={onClickTag}><p>Uncategorized</p></a></Link>
+            <h2><MdCategory style={{ paddingTop: "5px" }}/> Categories</h2>
+              <Link href="/category/Category"><a onClick={closeALl}><p className="cate-text">Category</p></a></Link>
+              <Link href="/category/Classic"><a onClick={closeALl}><p className="cate-text">Classic</p></a></Link>
+              <Link href="/category/Life"><a onClick={closeALl}><p className="cate-text">Life</p></a></Link>
+              <Link href="/category/Runner"><a onClick={closeALl}><p className="cate-text">Runner</p></a></Link>
+              <Link href="/category/Style"><a onClick={closeALl}><p className="cate-text">Style</p></a></Link>
+              <Link href="/category/Uncategorized"><a onClick={closeALl}><p className="cate-text">Uncategorized</p></a></Link>
 
 
           </div>
           <div className="right-tag">
-            <h2>Tags</h2>
-            <p>brooklyn</p>
-            <p>fashion</p>
-            <p>women</p>
+            <h2><FaHashtag style={{ paddingTop: "5px" }}/>Tags</h2>
+            <Link href="/tags/brooklyn"><a onClick={closeALl}><p className="cate-text">brooklyn</p></a></Link>
+            <Link href="/tags/fashion"><a onClick={closeALl}><p className="cate-text">fashion</p></a></Link>
+            <Link href="/tags/women"><a onClick={closeALl}><p className="cate-text">women</p></a></Link>
           </div>
         </div>
       </div>
@@ -54,22 +75,23 @@ const Navbar = () => {
           <ul className={click ? "menu active" : "menu"}>
             <li className="menu-link" onClick={closeMobileMenu}>
               <Link href="/home">
-                <a>HOME</a>
+                <a className="nav-item"><p className="nav-text">Home</p></a>
               </Link>
             </li>
             <li className="menu-link" onClick={closeMobileMenu}>
               <Link href="/posts">
-                <a className="nav-item-post">Posts</a>
+                <a className="nav-item"><p className="nav-text">Posts</p></a>
               </Link>
             </li>
-            <li className="menu-link" onClick={onClickTag}>
-              <a className="nav-item-category">
-                Category/Tag
+            <li className="menu-link" onClick={onClickTag} style={{cursor: "pointer"}}>
+              <a className="nav-item">
+              <p className="nav-text">Category/Tags
                 {clickTag ? (
                   <AiFillCaretUp style={{ paddingTop: "4px" }} />
                 ) : (
                   <AiFillCaretDown style={{ paddingTop: "4px" }} />
                 )}
+                </p>
               </a>
             </li>
           </ul>

@@ -44,12 +44,13 @@ const CategoryType = ({ posts, users, categories, cateName }) => {
   }
 
   return (
-    <div className="container">
-      <h1>{cateName}</h1>
-      <div className="post-container">
-        <Grid container justifyContent="center">
+<div className="post-container">
+
+        
+        <Grid container sx={{  marginTop: '5rem'}} justifyContent="center">
           <Grid item>
             <ThemeProvider theme={lightTheme}>
+            <h1>{cateName}</h1>
               <Box
                 sx={{
                   display: "grid",
@@ -63,7 +64,7 @@ const CategoryType = ({ posts, users, categories, cateName }) => {
           </Grid>
         </Grid>
       </div>
-    </div>
+
   );
 };
 

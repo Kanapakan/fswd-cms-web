@@ -1,10 +1,7 @@
 
 .detail_con {
     height: 100%;
-    min-width: 480px;
-    /* margin: 70px; */
-    /* padding-left: 15px  ;
-    padding-right: 15px  ; */
+
     padding: 20px;
     flex-direction: column;
     /* text-align: center;
@@ -17,8 +14,12 @@
 .post_content {
     /* margin: 70px; */
     background: white;
-    padding: 50px;
+    padding: 3vh;
+    margin-top: 5rem;
     text-align: center;
+    box-shadow:  0 0 10px 0 rgb(39 43 47 / 10%);
+
+
 }
 
 .comment_content{
@@ -53,4 +54,15 @@
 .post_comments {
 
     height: 128;
+}
+
+.title_header_all {
+    /* background: rgb(165, 165, 165); */
+    justify-content: center;
+    height: 90px;
+    /* color: rgb(255, 255, 255); */
+    display: flex;
+    /* flex-wrap: wrap; */
+    margin-bottom: 20px;
+
 }

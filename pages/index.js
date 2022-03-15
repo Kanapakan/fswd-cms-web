@@ -8,7 +8,7 @@ import PostContent from './posts'
 
 export default function Home2() {
   return (
-    <div>
+    <div className="container">
       <PostContent />
           </div>
   )

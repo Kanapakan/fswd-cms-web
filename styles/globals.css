@@ -29,14 +29,16 @@ h3 {
 h2 {
   font-size: 26px;
 }
-h1 {
-  font-size: 28px;
-}
+
 
 img {
-  max-height: 30vw;
+  /* max-height: 30vw; */
+  display: block;
+overflow: auto;
+  width: 100%;
+  /* height: 100px; */
   max-width: -webkit-fill-available;
-  border-radius: 24px;
+  /* border-radius: 24px; */
 
 
 }
@@ -50,7 +52,7 @@ a {
   box-sizing: border-box;
 }
 .container {
-  background: rgb(250, 248, 246);
+  background: rgb(249, 250, 254);
   margin: 0px;
   padding: 20px ;
   padding-left: 10rem;
@@ -59,15 +61,20 @@ a {
 
 
 .post-container {
-  background: rgb(250, 248, 246);
+  background: rgb(249, 250, 254);
   /* margin: 0px; */
   padding: 40px ; 
-  /* padding-left: 5rem;
-  padding-right: 5rem; */
+
+
 
 }
 .more-link {
   color: rgb(33, 126, 126);
+}
+
+.card-content:hover {
+  box-shadow: rgb(0 8 36 / 15%) 0px 4px 20px -5px;
+  transition: 0.3s ease;
 }
 
 @media screen and (max-width: 900px) {
@@ -91,3 +98,19 @@ a {
     font-size: 22px;
   }
 }
+
+.content-home {
+  -webkit-box-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  margin: auto;
+  max-width: 864px;
+  position: relative;
+  text-align: center;
+  z-index: 500;
+  padding-top: 0px !important;
+}
+
