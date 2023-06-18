@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from "react";
-import PostCard from "../../components/PostCard";
+import { PostCard, TitleCard } from "../../components";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import TitleCard from "../../components/TitleCard"
+import { getPosts, getUsers, getCategories } from "../../services";
 
-export const getServerSideProps = async () => {
-  const userRes = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/users')
-  const user = await userRes.json()
-  const postRes = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/posts/?_embed')
-  const post = await postRes.json()
-  const categoryRes = await fetch('https://fswd-wp.devnss.com/wp-json/wp/v2/categories')
-  const category = await categoryRes.json()
 
-  return {
-      props: {
-          posts: post,
-          users: user,
-          categories: category,
-          // catalogId: context.query.id == null ? 0 : context.query.id,
-      }
-  }
-}
+function PostContent() {
+  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-function PostContent({posts, users, categories}) {
+  useEffect(() => {
+    getPosts().then((result) => {
+      setPosts(result);
+    })
+
+    getUsers().then((result) => {
+      setUsers(result);
+    })
+
+    getCategories().then((result) => {
+      setCategories(result);
+    })
+
+  }, [])
 
   const lightTheme = createTheme({ palette: { mode: "light" } });
+  
   return (
     <div className="post-container">
       <Grid container sx={{  marginTop: '5rem'}} justifyContent="center">

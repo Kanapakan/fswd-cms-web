@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import PostCard from "../../components/PostCard";
+import { AuthorCard, TitleCard } from "../../components";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import AuthorCard from "../../components/AuthorCard"
-import TitleCard from "../../components/TitleCard";
+
 
 export const getServerSideProps = async (context) => {
   const userRes = await fetch("https://fswd-wp.devnss.com/wp-json/wp/v2/users/"+ context.params.id);
