@@ -1,37 +1,21 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import CommentCard from "../../components/CommentCard";
+import { CommentCard } from "../../components";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import styles from "../../styles/Comment.module.css";
 import moment from "moment";
 import Link from "next/link";
+import { getPostDetails, getPosts, getUserDetails } from "../../services";
+import { pink } from "@mui/material/colors";
 
-export const getServerSideProps = async (context) => {
-  const res = await fetch(
-    "https://fswd-wp.devnss.com/wp-json/wp/v2/posts/" + context.params.id
-  );
-  const data = await res.json();
-  const userRes = await fetch("https://fswd-wp.devnss.com/wp-json/wp/v2/users/" + data.author);
-  const user = await userRes.json();
-  const categoryRes = await fetch(
-    "https://fswd-wp.devnss.com/wp-json/wp/v2/categories"
-  );
-  const category = await categoryRes.json();
-  return {
-    props: { post: data, 
-      users: user, 
-      categories: category },
-  };
-};
-const PostDetails = ({ post, users, categories }) => {
+const PostDetails = ({ post, user }) => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [reloadMent, setReloadMent] = useState(false);
- 
-  console.log(users);
+
 
   const submitPost = async ({ name, comment }) => {
     const response = await fetch(
@@ -55,6 +39,7 @@ const PostDetails = ({ post, users, categories }) => {
     setReloadMent(!reloadMent);
     alert("Your Comment was sent!");
   };
+
   return (
     <div className="container">
       {/* <p> {parse(post.content.rendered)}</p> */}
@@ -63,13 +48,36 @@ const PostDetails = ({ post, users, categories }) => {
           <h1>{post.title.rendered}</h1>
           <hr />
           <div className="author-area" style={{ textAlign: "left" }}>
-            <p style={{fontSize: "20px", margin:"0px"}} >Published on {moment(post.date).format("LLL")}</p>
-            <Link href={"/author/" + users.id}>
+            <div className=" text-gray-700">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                // className="h-6 w-6 inline mr-2 text-pink-500"
+                style={{ color: "rgb(138, 174, 207)", width: "30px", verticalAlign: "middle" }}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <span className="align-middle" style={{ marginLeft: "5px"}}>
+                {moment(post.createdAt).format("MMM DD, YYYY")}
+              </span>
+            </div>
+            <Link href={"/author/" + post.author.id}>
               <a>
-                <p className={styles.author_link}style={{fontSize: "22px", margin:"0px"}}>{users.name}</p>
+                <p
+                  className={styles.author_link}
+                  style={{ fontSize: "22px", margin: "0px" }}
+                >
+                  {user.name}
+                </p>
               </a>
             </Link>
-            
           </div>
 
           <span dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
@@ -133,3 +141,29 @@ const PostDetails = ({ post, users, categories }) => {
 };
 
 export default PostDetails;
+
+// Fetch data at build time
+export async function getStaticProps({ params }) {
+  const data = await getPostDetails(params.id);
+  const userData = await getUserDetails(data.author);
+  return {
+    props: {
+      post: data,
+      user: userData,
+    },
+  };
+}
+
+// Specify dynamic routes to pre-render pages based on data.
+// The HTML is generated at build time and will be reused on each request.
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const paths = posts.map((post) => ({
+    params: { id: post.id.toString() },
+  }));
+  console.log(posts[1].id);
+  return {
+    paths,
+    fallback: true,
+  };
+}
