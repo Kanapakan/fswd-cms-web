@@ -36,7 +36,7 @@ const CategoryType = ({ posts, users, categories, cateName }) => {
           post.categories.find((p) => p === cat.id) &&
           cat.name === cateName
         ) {
-          console.log(post, cat.name);
+          // console.log(post, cat.name);
           cate.push(post);
         }
       })

@@ -37,7 +37,7 @@ const TagTypes = ({ posts, users, tags, tagName }) => {
           post.tags.find((t) => t === tag.id) &&
           tag.name === tagName
         ) {
-          console.log(post, tag.name);
+          // console.log(post, tag.name);
           tagArr.push(post);
         }
       })

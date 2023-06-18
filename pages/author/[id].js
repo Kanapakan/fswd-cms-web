@@ -39,7 +39,7 @@ const AuthorPage = ({posts, users}) => {
 
   lenArr = postArr.length
 
-  console.log(lenArr)
+  // console.log(lenArr)
 
   const lightTheme = createTheme({ palette: { mode: "light" } });
   

@@ -1,20 +1,21 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { CommentCard } from "../../components";
-import Paper from "@mui/material/Paper";
+import { CommentCard, Loading } from "../../components";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import styles from "../../styles/Comment.module.css";
 import moment from "moment";
 import Link from "next/link";
 import { getPostDetails, getPosts, getUserDetails } from "../../services";
-import { pink } from "@mui/material/colors";
+import { useRouter } from "next/router";
 
 const PostDetails = ({ post, user }) => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [reloadMent, setReloadMent] = useState(false);
+
+  console.log(post.title.rendered);
 
 
   const submitPost = async ({ name, comment }) => {
@@ -161,9 +162,8 @@ export async function getStaticPaths() {
   const paths = posts.map((post) => ({
     params: { id: post.id.toString() },
   }));
-  console.log(posts[1].id);
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }

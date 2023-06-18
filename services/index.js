@@ -9,7 +9,7 @@ export const getPosts = async () => {
 
 export const getPostDetails = async ( postId ) => {
     const result = await fetch(`https://fswd-wp.devnss.com/wp-json/wp/v2/posts/${postId}` )
-    console.log("result", postId, result);
+    // console.log("result", postId, result);
   
     return result.json();
 }

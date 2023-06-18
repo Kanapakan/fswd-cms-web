@@ -12,7 +12,7 @@ import moment from 'moment'
 import Link from "next/link";
 
 const PostCard = ({ posts, users, catagories }) => {
-  console.log(catagories)
+  // console.log(catagories)
 
   return (
     <>
